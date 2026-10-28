@@ -7,7 +7,11 @@ app.use(express.json());
 app.use(cors());
 
 // Database connection
-mongoose.connect('mongodb://root:secret@mongo:27017/products?authSource=admin');
+mongoose.connect(
+  'mongodb+srv://rajputharsh292004_db_user:Harsh29@cluster0.jvsa7ap.mongodb.net/mern-docker?retryWrites=true&w=majority'
+)
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.log('MongoDB connection failed:', err.message));
 const Product = mongoose.model('Product', { name: String, price: Number });
 app.get('/', (req, res) => {
     return res.send('Welcome to Node js, express js in Docker');
