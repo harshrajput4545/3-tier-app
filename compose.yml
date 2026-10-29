@@ -1,0 +1,29 @@
+
+
+services:
+  backend:
+    image: harshrajput29/3tbackend:latest
+    container_name: 3tbackend
+    environment:
+      PORT: "4000"
+      MONGODB_URI: ${MONGODB_URI}
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  frontend:
+    image: harshrajput29/3tfrontend:latest
+    container_name: 3tfrontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
