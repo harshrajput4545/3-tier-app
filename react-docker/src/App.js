@@ -9,26 +9,27 @@ function App() {
         async function fetchProducts() {
             try {
                 const { data } = await axios.get(
-                    'http://localhost:5500/api/products'
+                    'http://localhost:4000/api/products'
                 );
                 setProducts(data);
             } catch (err) {
-                console.log(err);
+                console.error('Error fetching products:', err.message);
             }
         }
+
         fetchProducts();
     }, []);
+
     return (
         <div className="App">
-            <h1>My products Products</h1>
-            {products.map((product) => {
-                return (
-                    <div key={product._id}>
-                        <h3>{product.name}</h3>
-                        <p>{product.price}</p>
-                    </div>
-                );
-            })}
+            <h1>My Products</h1>
+
+            {products.map((product) => (
+                <div key={product._id}>
+                    <h3>{product.name}</h3>
+                    <p>Price: ₹{product.price}</p>
+                </div>
+            ))}
         </div>
     );
 }
